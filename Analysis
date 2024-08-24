@@ -1,0 +1,30 @@
+#MySQl
+with case_crew as(
+select Ships_Names, Last_Port, Next_Port, cargo, Quantity, Total_Crew, STS_Provider,
+ case when total_crew < 16 then 'Low crew'
+when  total_crew = 16 then 'Manageable crew'
+when total_crew > 16 then 'Okay crew'
+else 'null 'end as Level_of_crew
+from analysis), #Cte to mark the boundary for the level of the STS
+
+ ports as(
+select ships_names, last_port
+from analysis) #second cte to select ship names and last port
+
+#joining the first cte, second cte to the original table
+select case_crew.ships_names, ports.last_port,
+case when
+		sts_provider = 'ROTC' then total_crew else '-' end as ROTC,
+case when 
+		sts_provider = 'HAIM' then total_crew else '-' end as HAIM,
+case when 
+		sts_provider = 'Cadogan' then total_crew else '-' end as Cadogan,
+case when 
+		sts_provider = 'Berners' then total_crew else '-' end as Berners,
+case when 		
+		sts_provider = 'Grove' then total_crew else '-' end as Grove,
+cargo, quantity, level_of_crew, next_port
+from case_crew
+inner join ports
+on ports.ships_names = case_crew.ships_names
+order by ships_names;
