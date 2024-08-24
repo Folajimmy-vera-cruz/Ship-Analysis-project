@@ -1,0 +1,3 @@
+The idea of this project is to analyze ships' movement data from different ports on set to make a delivery of cargo around the world. 
+After doing my research, i found out ship-to-ship service are one of the factors that could cause delays in the untimly delivery of some of the cargo, 
+so i did some exploration and got to this code...
