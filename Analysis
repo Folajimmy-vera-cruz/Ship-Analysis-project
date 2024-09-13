@@ -5,21 +5,40 @@ from analysis; # selecting everything to see the full dataset
 select count(distinct(Next_Port)) as dist_Nextport, 
  count(distinct(Last_Port)) as dist_Lastport  
  from analysis; #checking to see the different number of ports.
+ 
+select distinct(Days_in_Lome)
+ from analysis;#checking to the distinct numbers of days a ship spent in Lome
+
+select max(Days_in_Lome), min(Days_in_Lome) 
+from analysis; #checking to know the maximum and minimum days a ship spent in Lome
+
+select Ships_Names, last_port, Next_Port, cargo, Quantity, Days_in_Lome
+from analysis
+where Days_in_Lome = 18; #checking to know the information of ships that spent the minimum days in Lome
+
+select Ships_Names, last_port, Next_Port, cargo, Quantity, Days_in_Lome
+from analysis
+where Days_in_Lome = 69; #checking to know the information of ships that spent the maximum days in Lome
+
+select avg(Days_in_Lome) as avg_days_in_Lome
+from analysis; #checking to know the average days a ship spent in Lome
 
 select Ships_Names,
  Last_Port,
  Next_Port,
  count(Next_Port) over (partition by Last_Port) as Num_leaving,
- Cargo
-from analysis; #using agg function and partition to determine the number of ships leaving check port 
+ Cargo,
+ Days_in_Lome
+from analysis; #using agg function and partition to determine the number of ships leaving each port 
+
 
 with case_crew as(
 select Ships_Names, Last_Port, Next_Port, cargo, Quantity, Total_Crew, STS_Provider,
  case when total_crew < 16 then 'Low crew'
-when  total_crew = 16 then 'Manageable crew'
+when  total_crew = 16 then 'Managable crew'
 when total_crew > 16 then 'Okay crew'
 else 'null 'end as Level_of_crew
-from analysis), #using CTE to create a temp table of assigning the crew number into boundaries 
+from analysis), #using CTE to create a temp table of assign the crew number into boundaries 
 
  ports as(
 select ships_names, last_port
