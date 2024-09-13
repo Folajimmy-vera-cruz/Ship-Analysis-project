@@ -1,3 +1,3 @@
-The idea of this project is to analyze ships' movement data from different ports on set to make a delivery of cargo around the world. 
-After doing my research, I found out ship-to-ship service is one of the factors that could cause delays in the untimely delivery of some of the cargo, 
-so I did some exploration and got to this code...
+This project aims to analyze ships' movement data from different ports on set to deliver cargo around the world. 
+After carefully exploring the dataset, I found out the congestion of the exiting port could likely cause a delay in the timely delivery of some cargo, and the ship-to-ship service in addition to the level of crew could also be a determining factor that could cause delays in the untimely delivery of some of the cargo.
+I did my exploration in MySQL workbench which mostly included the use of CTE and the partition by function of the ships by the last port and next port to know the number of ships that leave one port to the next. 
